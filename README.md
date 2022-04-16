@@ -20,10 +20,15 @@ ASG
 
 Pre-requisites:
 
-Create three S3 buckets named "prod-group1-acsproject", "dev-group1-acsproject" and "staging-group1-acsproject" to store terraform state remotely. The S3 bucket names should be gloablly unique.
-Create a S3 bucket for website files.
-Create SSH keys using SSH-Key gen command under the webserver directory. 
-Commands used : ssh-keygen -t rsa -C "Group1-project-dev" -f Group1-project-dev
+1. S3 Buckets should be created. 
+    - Total of 3 Buckets needs to be created. 
+    - Name of the buckets will be : "prod-group1-acsproject", "dev-group1-acsproject" and "staging-group1-acsproject"
+
+2. SSH Keys should be generated for each environment.
+    - Command to generate ssh key : ssh-keygen -t rsa -f "keyname"
+    - Keys should be created in the webserver folder of the each environment.
+    - Here we need total of 3 keys for 3 different enviroment.
+    - Key Names will be  : "Group1-project-dev", "Group1-project-prod" and "Group1-project-staging"
 
 
 Initializing Terraform
@@ -70,19 +75,33 @@ vpc-staging
 globalvars
 
 
-Steps to follow :
+**********************************************************************************************************************************************************************
 
-- Create Prod, Dev, staging S3 buckets to store the terraform state
+STEPS:
+
+1. Change directory to /modules/globalvar/ and perform terraform apply.
+2.  Now, change to direcotory of dev.
+3.  Again change directory to network and perform  - terraform init
+                                                   - terraform fmt
+                                                   - terraform validate
+                                                   - terraform plan
+                                                   - terraform apply
+
+4. Performing the above actions will create network remote state in the mentioned S3 Bucket. (config.tf)
+5. Now change directory to /webserver. Generate ssh-key.
+6. Then,                                  Perform  - terraform init
+                                                   - terraform fmt
+                                                   - terraform validate
+                                                   - terraform plan
+                                                   - terraform apply
+                                                
+7. To deploy prod, change directory to prod.
+8. Repeat Steps 3 to 6.
+9. To deploy staging, change directory to staging.
+10. Repeat Step 3 to 6.
 
 
-On each VPC,
-- Deploy network 
-- Create key pair
-- Deploy  Webservers
-
-
-
-
+********************************************************************************************************************************************************************
 
 
 
