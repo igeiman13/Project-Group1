@@ -72,11 +72,11 @@ globalvars
 
 Steps to follow :
 
-Create Prod, Dev, staging S3 buckets to store the terraform state
+- Create Prod, Dev, staging S3 buckets to store the terraform state
 On each VPC,
-Deploy network 
-Create key pair
-Deploy  Webservers
+- Deploy network 
+- Create key pair
+- Deploy  Webservers
 
 
 
