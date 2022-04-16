@@ -151,10 +151,10 @@ resource "aws_cloudwatch_metric_alarm" "metric_alarm_scaleOut_dev" {
     threshold = "10"
     alarm_description = "This metric monitors ec2 memory for high utilization and deploy more instance if required"
     alarm_actions = [
-        "${aws_autoscaling_policy.agents-scale-up.arn}"
+        "${aws_autoscaling_policy.asg_scaleOutPolicy-dev.arn}"
     ]
     dimensions = {
-        AutoScalingGroupName = "${aws_autoscaling_group.agents.name}"
+        AutoScalingGroupName = "${aws_autoscaling_group.asg.name}"
     }
 }
 
@@ -164,7 +164,7 @@ resource "aws_autoscaling_policy" "asg_scaleInPolicy-dev" {
     scaling_adjustment = -1
     adjustment_type = "ChangeInCapacity"
     cooldown = 120
-    autoscaling_group_name = "${aws_autoscaling_group.agents.name}"
+    autoscaling_group_name = "${aws_autoscaling_group.asg.name}"
 }
 
 resource "aws_cloudwatch_metric_alarm" "metric_alarm_scaleIn_dev" {
@@ -178,10 +178,10 @@ resource "aws_cloudwatch_metric_alarm" "metric_alarm_scaleIn_dev" {
     threshold = "5"
     alarm_description = "This metric monitors ec2 memory for low utilization on agent hosts"
     alarm_actions = [
-        "${aws_autoscaling_policy.agents-scale-down.arn}"
+        "${aws_autoscaling_policy.asg_scaleInPolicy-dev.arn}"
     ]
     dimensions = {
-        AutoScalingGroupName = "${aws_autoscaling_group.agents.name}"
+        AutoScalingGroupName = "${aws_autoscaling_group.asg.name}"
     }
 }
 
