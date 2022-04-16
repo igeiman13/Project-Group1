@@ -32,7 +32,7 @@ locals {
 data "terraform_remote_state" "network" {
   backend = "s3"
   config = {
-    bucket = "${var.env}-group1-acsproject"
+    bucket = "${var.env}1-group1-acsproject"
     key    = "${var.env}-network/terraform.tfstate"
     region = "us-east-1"
   }
