@@ -116,7 +116,7 @@ resource "aws_launch_configuration" "staging_config" {
 # Auto-Scaling-Group
 resource "aws_autoscaling_group" "asg" {
   name               = "${local.name_prefix}-Asg"
-  desired_capacity   = var.instance_count
+  desired_capacity   = 3
   max_size           = 4
   min_size           = 1
   launch_configuration = aws_launch_configuration.staging_config.name
